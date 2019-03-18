@@ -64,7 +64,16 @@ public class Controller : MonoBehaviour
 
     public void Jump()
     {
+        if (!cam.viewMode)
+        {
+            print(Input.GetKey(KeyCode.Space));
+            if (Input.GetKey(KeyCode.Space))
+            {
+                this.GetComponent<Rigidbody>().velocity = new Vector3(0f, jumpVelocity, 0f);
+            }
+            print(this.GetComponent<Rigidbody>().velocity);
 
+        }
     }
 
     }
