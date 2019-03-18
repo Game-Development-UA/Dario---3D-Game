@@ -27,7 +27,7 @@ public class Camera_Follow : MonoBehaviour
     {
             
 
-         if (Input.GetKey(KeyCode.V))
+        if (Input.GetKey(KeyCode.V))
             {
             UpdateViewMode();        
         }
@@ -37,11 +37,9 @@ public class Camera_Follow : MonoBehaviour
             CheckPlayerInput();
         }
         else {
-            this.transform.position = toFollow.transform.position - currOffset;
-            print("currOffset: " + currOffset);
-            
+            this.transform.position = toFollow.transform.position - currOffset;  
         }
-        print(this.transform.position);
+        
         UpdateCameraSpace(GetLookAtMatrix(this.transform.position, toFollow.transform.position, Vector3.up));
 
     }
