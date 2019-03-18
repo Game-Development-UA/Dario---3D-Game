@@ -4,24 +4,26 @@ using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
-    public LayerMask clickMask;
+    public Click_Controller clickPlane;
     public Vector3 targetLocation;
     public Camera_Follow cam;
     private Vector3 startPosition;
     private float timeVal;
+    public float jumpVelocity;
     public float charSpeed;
     // Start is called before the first frame update
     void Start()
     {
         startPosition = this.transform.position;
+        targetLocation = new Vector3(0f, 0.5f, 0f);
     }
 
     // Update is called once per frame
     void Update()
     {
         MoveToNextPosition();
+        Jump();
     }
-
 
     public void MoveToNextPosition()
     {
@@ -30,15 +32,12 @@ public class Controller : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 startPosition = this.transform.position;
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, 50f, clickMask))
-                {
-                    Vector3 mouseLoc = hit.point;
-                    targetLocation = mouseLoc;
-                }
+                timeVal = 0f;
+                clickPlane.GetNextLocation();
+                targetLocation = clickPlane.targetLocation;
+                targetLocation.y += 0.5f;
                 //mouseLoc.y = 0f;
-
+                print(targetLocation);
             }
             if (this.transform.position != targetLocation)
             {
@@ -47,19 +46,25 @@ public class Controller : MonoBehaviour
         }
     }
 
-
-    public void Interpolate() {
-
+    public void Interpolate()
+    {
         if (timeVal <= 1f)
         {
             float f = (Mathf.Pow(timeVal, 2) * (3f - (2f * timeVal)));
             this.transform.position = (1 - f) * startPosition + f * targetLocation;
             timeVal += Time.deltaTime * charSpeed;
         }
-        else {
+        else
+        {
             this.transform.position = targetLocation;
             startPosition = targetLocation;
             timeVal = 0f;
         }
     }
-}
+
+    public void Jump()
+    {
+
+    }
+
+    }
