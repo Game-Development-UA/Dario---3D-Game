@@ -5,24 +5,49 @@ using UnityEngine;
 public class Camera_Follow : MonoBehaviour
 {
     public GameObject toFollow;
+    private Vector3 currOffset;
     private Camera mCamera;
     public float zOffset;
     public float yOffset;
     public float limitTangent;
+    public float cameraSpeed;
+    public bool viewMode;
     // Start is called before the first frame update
     void Start()
     {
+        viewMode = false;
         mCamera = Camera.main;
-        Vector3 off = new Vector3(0f, yOffset, zOffset);
-        mCamera.transform.position = toFollow.transform.position - off;
+       currOffset = new Vector3(0f, yOffset, zOffset);
+        mCamera.transform.position = toFollow.transform.position - currOffset;
+        print("start position: " + this.transform.position);
     }
 
     // Update is called once per frame
     void Update()
     {
-        CheckPlayerInput();
+            
+
+         if (Input.GetKey(KeyCode.V))
+            {
+            UpdateViewMode();        
+        }
+        //print(viewMode);
+        if (viewMode)
+        {
+            CheckPlayerInput();
+        }
+        else {
+            this.transform.position = toFollow.transform.position - currOffset;
+            print("currOffset: " + currOffset);
+            
+        }
+        print(this.transform.position);
         UpdateCameraSpace(GetLookAtMatrix(this.transform.position, toFollow.transform.position, Vector3.up));
+
     }
+     
+        
+ 
 
     public Matrix4x4 GetLookAtMatrix(Vector3 eye, Vector3 target, Vector3 up)
     {
@@ -68,30 +93,47 @@ public class Camera_Follow : MonoBehaviour
     }
 
     public void CheckPlayerInput() {
+
         Vector3 F = toFollow.transform.position - this.transform.position;
+        Vector3 zMotion = new Vector3(F.x, 0f, F.z);
         F.Normalize();
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.S))
         {
             if (this.transform.position.y > toFollow.transform.position.y)
             {
-                this.transform.Translate(new Vector3(0f, -2f * Time.deltaTime, 0f));
+                this.transform.Translate(new Vector3(0f, -cameraSpeed * Time.deltaTime, 0f));
             }
         }
 
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.W))
         {
             print(F.y / F.z);
             if (Mathf.Abs(F.y / F.z) < limitTangent)
             {
-                this.transform.Translate(new Vector3(0f, 2f * Time.deltaTime, 0f));
+                this.transform.Translate(new Vector3(0f, cameraSpeed * Time.deltaTime, 0f));
             }
         }
 
 
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.D))
         {
-            this.transform.Translate(new Vector3(0f, 2f * Time.deltaTime, 0f));        
+            this.transform.Translate(new Vector3(cameraSpeed * Time.deltaTime, 0f,0f));        
         }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            this.transform.Translate(new Vector3(-cameraSpeed * Time.deltaTime, 0f, 0f));
+        }
+
     }
+
+public void UpdateViewMode() {
+    if (viewMode == false) {
+        viewMode = true;
+    }
+    else {
+        viewMode = false;
+    }
+}
 
 }
