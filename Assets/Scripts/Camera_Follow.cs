@@ -130,6 +130,15 @@ public class Camera_Follow : MonoBehaviour
             currOffset = new Vector3(currOffset.x + (cameraSpeed * Time.deltaTime), currOffset.y, currOffset.z);
         }
 
+        if (Input.GetKey(KeyCode.I)) {
+           
+            currOffset = new Vector3(currOffset.x - (F.x * cameraSpeed * Time.deltaTime),currOffset.y - (F.y * cameraSpeed * Time.deltaTime), currOffset.z - (F.z * cameraSpeed * Time.deltaTime));
+        }
+        if (Input.GetKey(KeyCode.O))
+        {
+            currOffset = new Vector3(currOffset.x + (F.x * cameraSpeed * Time.deltaTime), currOffset.y + (F.y * cameraSpeed * Time.deltaTime), currOffset.z + (F.z * cameraSpeed * Time.deltaTime));
+        }
+       
     }
 
 public void UpdateViewMode() {
