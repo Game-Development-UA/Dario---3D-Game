@@ -17,7 +17,7 @@ public class Controller_Button : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //this.transform.Rotate(0f, 90f * Time.deltaTime, 0f);
         if (Input.GetKey(KeyCode.UpArrow)) {
             // Move("Up");
             this.transform.Translate(new Vector3(0f, 0f, charSpeed * Time.deltaTime));

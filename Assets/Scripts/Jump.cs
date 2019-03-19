@@ -7,10 +7,15 @@ public class Jump : MonoBehaviour
     public float jumpVelocity;
     public float fallMultiplier;
     private bool inAir;
+    private float fallTime;
+    public float slowFallLimit;
+    private float fastFall;
     // Start is called before the first frame update
     void Start()
     {
         inAir = false;
+        fallTime = 0f;
+        fastFall = 0f;
     }
 
     // Update is called once per frame
@@ -29,12 +34,17 @@ public class Jump : MonoBehaviour
         {
             if (this.GetComponent<Rigidbody>().velocity.y < 0)
             {
+                fallTime += Time.deltaTime; 
                 this.GetComponent<Rigidbody>().velocity = new Vector3(0f, Physics.gravity.y * fallMultiplier * Time.deltaTime, 0f);
+                if (fallTime > slowFallLimit) {
+                    fastFall += Physics.gravity.y * Time.deltaTime;
+                    this.GetComponent<Rigidbody>().velocity = new Vector3(0f, fastFall, 0f);
+                }
 
             }
         }
        
-        print(this.GetComponent<Rigidbody>().velocity.y);
+        //print(this.GetComponent<Rigidbody>().velocity.y);
     }
 
     public void OnCollisionEnter(Collision collision) {

@@ -35,9 +35,11 @@ public class Camera_Follow : MonoBehaviour
         if (viewMode)
         {
             CheckPlayerInput();
+            this.transform.position = toFollow.transform.position - currOffset;
         }
         else {
-            this.transform.position = toFollow.transform.position - currOffset;  
+            // this.transform.position = toFollow.transform.position - currOffset;  
+            this.transform.position = toFollow.transform.position - currOffset;
         }
         
         UpdateCameraSpace(GetLookAtMatrix(this.transform.position, toFollow.transform.position, Vector3.up));
@@ -99,7 +101,9 @@ public class Camera_Follow : MonoBehaviour
         {
             if (this.transform.position.y > toFollow.transform.position.y)
             {
-                this.transform.Translate(new Vector3(0f, -cameraSpeed * Time.deltaTime, 0f));
+                //this.transform.Translate(new Vector3(0f, -cameraSpeed * Time.deltaTime, 0f));
+                currOffset = new Vector3(currOffset.x, currOffset.y + (cameraSpeed * Time.deltaTime), currOffset.z);
+                print(currOffset.y);
             }
         }
 
@@ -108,19 +112,22 @@ public class Camera_Follow : MonoBehaviour
             print(F.y / F.z);
             if (Mathf.Abs(F.y / F.z) < limitTangent)
             {
-                this.transform.Translate(new Vector3(0f, cameraSpeed * Time.deltaTime, 0f));
+                //this.transform.Translate(new Vector3(0f, cameraSpeed * Time.deltaTime, 0f));
+                currOffset = new Vector3(currOffset.x, currOffset.y - (cameraSpeed * Time.deltaTime), currOffset.z);
             }
         }
 
 
         if (Input.GetKey(KeyCode.D))
         {
-            this.transform.Translate(new Vector3(cameraSpeed * Time.deltaTime, 0f,0f));        
+            //this.transform.Translate(new Vector3(cameraSpeed * Time.deltaTime, 0f,0f));
+            currOffset = new Vector3(currOffset.x - (cameraSpeed * Time.deltaTime), currOffset.y, currOffset.z);
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            this.transform.Translate(new Vector3(-cameraSpeed * Time.deltaTime, 0f, 0f));
+            //this.transform.Translate(new Vector3(-cameraSpeed * Time.deltaTime, 0f, 0f));
+            currOffset = new Vector3(currOffset.x + (cameraSpeed * Time.deltaTime), currOffset.y, currOffset.z);
         }
 
     }
