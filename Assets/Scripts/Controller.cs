@@ -39,7 +39,7 @@ public class Controller : MonoBehaviour
                 //mouseLoc.y = 0f;
                 print(targetLocation);
             }
-            if (this.transform.position != targetLocation)
+            if (this.transform.position.x != targetLocation.x && this.transform.position.z != targetLocation.z)
             {
                 Interpolate();
             }
@@ -59,6 +59,7 @@ public class Controller : MonoBehaviour
             this.transform.position = targetLocation;
             startPosition = targetLocation;
             timeVal = 0f;
+           
         }
     }
 
@@ -76,4 +77,4 @@ public class Controller : MonoBehaviour
         }
     }
 
-    }
+}
