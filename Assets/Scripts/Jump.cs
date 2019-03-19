@@ -5,6 +5,7 @@ using UnityEngine;
 public class Jump : MonoBehaviour
 {
     public float jumpVelocity;
+    public float fallMultiplier;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,8 +17,15 @@ public class Jump : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
+            
             this.GetComponent<Rigidbody>().velocity = new Vector3(0f, jumpVelocity, 0f);
+            
         }
-        print(this.GetComponent<Rigidbody>().velocity);
+        if (this.GetComponent<Rigidbody>().velocity.y < 0) {
+            this.GetComponent<Rigidbody>().velocity = new Vector3(0f, Physics.gravity.y * fallMultiplier * Time.deltaTime, 0f);
+            
+        }
+       
+        print(this.GetComponent<Rigidbody>().velocity.y);
     }
 }
