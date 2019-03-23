@@ -6,6 +6,7 @@ public class Camera_Follow : MonoBehaviour
 {
     public GameObject toFollow;
     private Vector3 currOffset;
+    private Vector3 defaultCameraPosition;
     private Camera mCamera;
     public float zOffset;
     public float yOffset;
@@ -18,6 +19,7 @@ public class Camera_Follow : MonoBehaviour
         viewMode = false;
         mCamera = Camera.main;
        currOffset = new Vector3(0f, yOffset, zOffset);
+        defaultCameraPosition = new Vector3(0f, yOffset, zOffset);
         mCamera.transform.position = toFollow.transform.position - currOffset;
         print("start position: " + this.transform.position);
     }
@@ -25,21 +27,31 @@ public class Camera_Follow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-            
 
-        if (Input.GetKey(KeyCode.V))
-            {
-            UpdateViewMode();        
+        if (Input.GetKey(KeyCode.R))
+        {
+            currOffset =  defaultCameraPosition;
+
+            print("reset");
+            print(defaultCameraPosition);
+        }
+        else if (Input.GetKey(KeyCode.V))
+        {
+            UpdateViewMode();
         }
         //print(viewMode);
-        if (viewMode)
+        else
         {
-            CheckPlayerInput();
-            this.transform.position = toFollow.transform.position - currOffset;
-        }
-        else {
-            // this.transform.position = toFollow.transform.position - currOffset;  
-            this.transform.position = toFollow.transform.position - currOffset;
+            if (viewMode)
+            {
+                CheckPlayerInput();
+                this.transform.position = toFollow.transform.position - currOffset;
+            }
+            else
+            {
+                // this.transform.position = toFollow.transform.position - currOffset;  
+                this.transform.position = toFollow.transform.position - currOffset;
+            }
         }
         
         UpdateCameraSpace(GetLookAtMatrix(this.transform.position, toFollow.transform.position, Vector3.up));
