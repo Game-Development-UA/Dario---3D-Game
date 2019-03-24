@@ -51,6 +51,11 @@ public class Jump : MonoBehaviour
         if (collision.gameObject.tag == "floor") {
             this.GetComponent<Rigidbody>().velocity = new Vector3(this.GetComponent<Rigidbody>().velocity.x, 0f, this.GetComponent<Rigidbody>().velocity.z);
             inAir = false;
+            fallTime = 0f;
+        }
+        else if (collision.gameObject.tag == "platform") {
+            this.GetComponent<Rigidbody>().velocity = new Vector3(this.GetComponent<Rigidbody>().velocity.x, 0f, this.GetComponent<Rigidbody>().velocity.z);
+            inAir = false;
         }
 
     }

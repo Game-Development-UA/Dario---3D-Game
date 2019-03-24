@@ -67,6 +67,8 @@ public class Controller_Button : MonoBehaviour
                 this.transform.Translate(new Vector3(0f, 0f, -charSpeed * Time.deltaTime));
             }
         }
+
+
     }
    
 
