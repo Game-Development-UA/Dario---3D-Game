@@ -31,7 +31,7 @@ public class Move_Plat : MonoBehaviour
     void Update()
     {
         Interpolate();
-        timeVal += (Time.deltaTime / 10f) * horizontalSpeed;
+        timeVal += (Time.deltaTime / 10f) * move.magnitude;
     }
 
     public void Interpolate()
