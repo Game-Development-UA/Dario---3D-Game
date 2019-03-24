@@ -8,6 +8,7 @@ public class Camera_Follow : MonoBehaviour
     private Vector3 currOffset;
     private Vector3 defaultCameraPosition;
     private Camera mCamera;
+    public string camDirection;
     public float zOffset;
     public float yOffset;
     public float limitTangent;
@@ -16,6 +17,7 @@ public class Camera_Follow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        camDirection = "Forward";
         viewMode = false;
         mCamera = Camera.main;
        currOffset = new Vector3(0f, yOffset, zOffset);
@@ -30,16 +32,22 @@ public class Camera_Follow : MonoBehaviour
 
         if (Input.GetKey(KeyCode.R))
         {
-            currOffset =  defaultCameraPosition;
-
-            print("reset");
-            print(defaultCameraPosition);
+            currOffset = defaultCameraPosition;
+            camDirection = "Forward";
+            
         }
         else if (Input.GetKey(KeyCode.V))
         {
             UpdateViewMode();
         }
         //print(viewMode);
+        else if (Input.GetKey(KeyCode.A)) {
+
+           // this.transform.position = toFollow.transform.position - new Vector3(currOffset.z, currOffset.y, 0f);
+            currOffset = new Vector3(zOffset, yOffset, 0f);
+            camDirection = "Right";
+          
+        }
         else
         {
             if (viewMode)
@@ -51,6 +59,7 @@ public class Camera_Follow : MonoBehaviour
             {
                 // this.transform.position = toFollow.transform.position - currOffset;  
                 this.transform.position = toFollow.transform.position - currOffset;
+               
             }
         }
         
