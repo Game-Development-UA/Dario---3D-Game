@@ -29,40 +29,67 @@ public class Camera_Follow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetKey(KeyCode.R))
+        if (!viewMode)
         {
-            currOffset = defaultCameraPosition;
-            camDirection = "Forward";
-            
-        }
-        else if (Input.GetKey(KeyCode.V))
-        {
-            UpdateViewMode();
-        }
-        //print(viewMode);
-        else if (Input.GetKey(KeyCode.A)) {
+            if (Input.GetKey(KeyCode.R))
+            {
+                currOffset = defaultCameraPosition;
+                camDirection = "Forward";
 
-           // this.transform.position = toFollow.transform.position - new Vector3(currOffset.z, currOffset.y, 0f);
-            currOffset = new Vector3(zOffset, yOffset, 0f);
-            camDirection = "Right";
-          
+            }
+            else if (Input.GetKey(KeyCode.V))
+            {
+                UpdateViewMode();
+            }
+            //print(viewMode);
+            else if (Input.GetKey(KeyCode.A))
+            {
+
+                // this.transform.position = toFollow.transform.position - new Vector3(currOffset.z, currOffset.y, 0f);
+                currOffset = new Vector3(zOffset, yOffset, 0f);
+                camDirection = "Right";
+
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+
+                // this.transform.position = toFollow.transform.position - new Vector3(currOffset.z, currOffset.y, 0f);
+                currOffset = new Vector3(-zOffset, yOffset, 0f);
+                camDirection = "Left";
+
+            }
+            else if (Input.GetKey(KeyCode.W))
+            {
+
+                // this.transform.position = toFollow.transform.position - new Vector3(currOffset.z, currOffset.y, 0f);
+                currOffset = new Vector3(0f, yOffset, -zOffset);
+                camDirection = "Back";
+
+            }
         }
+
         else
         {
-            if (viewMode)
-            {
+            //  if (viewMode)
+            // {
+            if (camDirection == "Forward") {
                 CheckPlayerInput();
                 this.transform.position = toFollow.transform.position - currOffset;
             }
-            else
+            if (Input.GetKey(KeyCode.V))
             {
-                // this.transform.position = toFollow.transform.position - currOffset;  
-                this.transform.position = toFollow.transform.position - currOffset;
-               
+                UpdateViewMode();
             }
+
+            //  }
+            // else
+            //  {
+            // this.transform.position = toFollow.transform.position - currOffset;  
+            //this.transform.position = toFollow.transform.position - currOffset;
+
+            // }
         }
-        
+        this.transform.position = toFollow.transform.position - currOffset;
         UpdateCameraSpace(GetLookAtMatrix(this.transform.position, toFollow.transform.position, Vector3.up));
 
     }
