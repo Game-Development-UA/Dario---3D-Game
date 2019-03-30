@@ -19,7 +19,9 @@ public class Lava : MonoBehaviour
     }
 
     public void OnCollisionEnter(Collision col) {
-        playerToReset.transform.position = resetPosition; 
-
+        if (col.gameObject.tag == "Player")
+        {
+            playerToReset.transform.position = resetPosition;
+        }
     }
 }

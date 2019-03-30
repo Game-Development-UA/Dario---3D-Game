@@ -19,6 +19,8 @@ public class PowerUp_Jump : MonoBehaviour
 
 
         Coll.gameObject.GetComponent<Jump>().jumpVelocity = 1.5f * Coll.gameObject.GetComponent<Jump>().jumpVelocity;
+        Coll.gameObject.GetComponent<Jump>().jumpPowerUp = true;
+
         Destroy(this.gameObject);
 
     }

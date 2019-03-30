@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Jump : MonoBehaviour
 {
+    public bool jumpPowerUp;
     public float jumpVelocity;
     public float fallMultiplier;
     private bool inAir;
@@ -16,6 +17,7 @@ public class Jump : MonoBehaviour
         inAir = false;
         fallTime = 0f;
         fastFall = 0f;
+        jumpPowerUp = false;
     }
 
     // Update is called once per frame
