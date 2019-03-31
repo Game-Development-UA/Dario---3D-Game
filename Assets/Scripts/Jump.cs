@@ -7,10 +7,12 @@ public class Jump : MonoBehaviour
     public bool jumpPowerUp;
     public float jumpVelocity;
     public float fallMultiplier;
+    public float fastfallMultiplier;
     private bool inAir;
     private float fallTime;
     public float slowFallLimit;
     private float fastFall;
+    private int numUpdate;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,11 +20,13 @@ public class Jump : MonoBehaviour
         fallTime = 0f;
         fastFall = 0f;
         jumpPowerUp = false;
+        numUpdate = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        fastFall = Physics.gravity.y * fallMultiplier * Time.deltaTime;
         if (Input.GetKey(KeyCode.Space))
         {
             if (!inAir)
@@ -37,10 +41,17 @@ public class Jump : MonoBehaviour
             if (this.GetComponent<Rigidbody>().velocity.y < 0)
             {
                 fallTime += Time.deltaTime; 
-                this.GetComponent<Rigidbody>().velocity = new Vector3(0f, Physics.gravity.y * fallMultiplier * Time.deltaTime, 0f);
-                if (fallTime > slowFallLimit) {
-                    fastFall += Physics.gravity.y * Time.deltaTime;
+                
+                if (fallTime > slowFallLimit)
+                {
+                    numUpdate++;
+                    fastFall = Physics.gravity.y * fallMultiplier * Time.deltaTime;
+                    fastFall -= numUpdate * fastfallMultiplier * Time.deltaTime;
+                    print(fastFall);
                     this.GetComponent<Rigidbody>().velocity = new Vector3(0f, fastFall, 0f);
+                }
+                else {
+                    this.GetComponent<Rigidbody>().velocity = new Vector3(0f, Physics.gravity.y * fallMultiplier * Time.deltaTime, 0f);
                 }
 
             }
@@ -58,6 +69,7 @@ public class Jump : MonoBehaviour
         else if (collision.gameObject.tag == "platform") {
             this.GetComponent<Rigidbody>().velocity = new Vector3(this.GetComponent<Rigidbody>().velocity.x, 0f, this.GetComponent<Rigidbody>().velocity.z);
             inAir = false;
+            fallTime = 0f;
         }
 
     }
