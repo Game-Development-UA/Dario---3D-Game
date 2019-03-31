@@ -15,6 +15,7 @@ public class Create_Plat : MonoBehaviour
     private bool pathJumpStarted;
     private bool compTriangle;
     private bool compVertices;
+    private Renderer rend;
     // Start is called before the first frame update
     void Start()
     {
@@ -96,5 +97,7 @@ public class Create_Plat : MonoBehaviour
         mesh.triangles = triangles;
         MeshCollider myMC = this.gameObject.GetComponent<MeshCollider>();
         myMC.sharedMesh = mesh;
+        rend = this.gameObject.GetComponent<Renderer>();
+        rend.material.SetColor("_Color", Random.ColorHSV());
     }
 }
