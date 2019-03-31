@@ -17,7 +17,7 @@ public class Collectible : MonoBehaviour
         
     }
 
-    public void OnCollisionEnter(Collision Coll)
+    public void OnTriggerEnter(Collider Coll)
     {
 
 

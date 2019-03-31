@@ -5,6 +5,7 @@ using UnityEngine;
 public class Create_Plat : MonoBehaviour
 {
     Mesh mesh;
+   
     public int numberSquares;
     public float length;
     public GameObject player;
@@ -32,32 +33,38 @@ public class Create_Plat : MonoBehaviour
     {
         if (!pathJumpStarted)
         {
-            if (player.GetComponent<Jump>().jumpPowerUp)
+            if (this.gameObject.name == "JumpPath")
             {
-                pathJumpStarted = true;
-                compTriangle = false;
-                compVertices = false;
-                buildPath(numberSquares, this.transform.position, length, "path", new Vector3(0, 0, -1));
+                if (player.GetComponent<Jump>().jumpPowerUp)
+                {
+                    pathJumpStarted = true;
+                    compTriangle = false;
+                    compVertices = false;
+                    buildPath(numberSquares, this.transform.position, length, new Vector3(0, 0, -1));
 
+                }
             }
         }
-        if (!pathRampStarted) {
-
-            if (player.GetComponent<PlayerInfo>().Collectibles[1])
+        if (!pathRampStarted)
+        {
+            if (this.gameObject.name == "OptionalRampPath")
             {
-                pathRampStarted = true;
-                compTriangle = false;
-                compVertices = false;
-                buildPath(numberSquares, this.transform.position, length, "path", new Vector3(0, 1, -1));
+                if (player.GetComponent<PlayerInfo>().Collectibles[1])
+                {
+                    pathRampStarted = true;
+                    compTriangle = false;
+                    compVertices = false;
+                    buildPath(numberSquares, this.transform.position, length, new Vector3(0, 1, -1));
+
+                }
 
             }
-
         }
 
 
     }
 
-    public void buildPath(int numSquares, Vector3 startVertex, float edgeLength, string type, Vector3 Direction)
+    public void buildPath(int numSquares, Vector3 startVertex, float edgeLength, Vector3 Direction)
     {
         int numVertices = (numSquares - 1) * 2 + 4;
         bool compVertex = false;
@@ -68,8 +75,8 @@ public class Create_Plat : MonoBehaviour
         vertices = new Vector3[numVertices];
         triangles = new int[numTriangles * 3];
         // vertices[0] = startVertex;
-        if (type == "path")
-        {
+        
+        
             for (i = 0; i < numVertices; i++)
             {
                 print(vertices[i]);
@@ -77,7 +84,7 @@ public class Create_Plat : MonoBehaviour
                 {
                     // vertices[i] = new Vector3(startVertex.x, startVertex.y, startVertex.z - numVertex * edgeLength);
                     //vertices[i] = new Vector3(1f, 0f, 0f - numVertex * edgeLength);
-                    vertices[i] = new Vector3(1f + Direction.x * numVertex * edgeLength, 0f + Direction.y * numVertex * edgeLength, 0f + Direction.z * numVertex * edgeLength);
+                    vertices[i] = new Vector3(1f + Direction.x * numVertex * edgeLength, (Direction.y * numVertex * edgeLength) * Mathf.Sin(25 * Mathf.Deg2Rad), 0f + Direction.z * numVertex * edgeLength);
                     print("work");
                     compVertices = true;
                 }
@@ -85,7 +92,7 @@ public class Create_Plat : MonoBehaviour
                 {
                     // vertices[i] = new Vector3(startVertex.x - edgeLength, startVertex.y, startVertex.z - numVertex * edgeLength);
                     // vertices[i] = new Vector3(1f - edgeLength, 0f, 0f - numVertex * edgeLength);
-                    vertices[i] = new Vector3(Mathf.Abs(Direction.z) * (1f + Direction.x * numVertex * edgeLength - edgeLength), 0f + Direction.y * numVertex * edgeLength,  0f + Direction.z * numVertex * edgeLength - (Direction.x * edgeLength));
+                    vertices[i] = new Vector3(Mathf.Abs(Direction.z) * (1f + Direction.x * numVertex * edgeLength - edgeLength), (Direction.y * numVertex * edgeLength) * Mathf.Sin(25 * Mathf.Deg2Rad),  0f + Direction.z * numVertex * edgeLength - (Direction.x * edgeLength));
                     compVertices = false;
                     numVertex++;
                 }
@@ -119,7 +126,7 @@ public class Create_Plat : MonoBehaviour
             myMC.sharedMesh = mesh;
             rend = this.gameObject.GetComponent<Renderer>();
             rend.material.SetColor("_Color", Random.ColorHSV());
-        }
-    }
+       }
+    
  
 }
