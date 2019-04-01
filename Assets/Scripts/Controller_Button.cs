@@ -6,6 +6,7 @@ public class Controller_Button : MonoBehaviour
 {
   
     public float charSpeed;
+    public bool stuckToPlat;
     
     public Camera_Follow cam;
     // Start is called before the first frame update
@@ -20,91 +21,94 @@ public class Controller_Button : MonoBehaviour
         //this.transform.Rotate(0f, 90f * Time.deltaTime, 0f);
         if (!cam.viewMode)
         {
-            if (Input.GetKey(KeyCode.UpArrow))
+            if (!stuckToPlat)
             {
-                // Move("Up");
-                if (cam.camDirection == "Forward")
+                if (Input.GetKey(KeyCode.UpArrow))
                 {
-                    this.transform.Translate(new Vector3(0f, 0f, charSpeed * Time.deltaTime));
+                    // Move("Up");
+                    if (cam.camDirection == "Forward")
+                    {
+                        this.transform.Translate(new Vector3(0f, 0f, charSpeed * Time.deltaTime));
+                    }
+                    else if (cam.camDirection == "Right")
+                    {
+                        this.transform.Translate(new Vector3(charSpeed * Time.deltaTime, 0f, 0f));
+                    }
+                    else if (cam.camDirection == "Left")
+                    {
+                        this.transform.Translate(new Vector3(-charSpeed * Time.deltaTime, 0f, 0f));
+                    }
+                    else if (cam.camDirection == "Back")
+                    {
+                        this.transform.Translate(new Vector3(0f, 0f, -charSpeed * Time.deltaTime));
+                    }
+
                 }
-                else if (cam.camDirection == "Right")
+                if (Input.GetKey(KeyCode.DownArrow))
                 {
-                    this.transform.Translate(new Vector3(charSpeed * Time.deltaTime, 0f, 0f));
+                    //Move("Down");
+                    //this.transform.Translate(new Vector3(0f, 0f, -charSpeed * Time.deltaTime));
+                    if (cam.camDirection == "Forward")
+                    {
+                        this.transform.Translate(new Vector3(0f, 0f, -charSpeed * Time.deltaTime));
+                    }
+                    else if (cam.camDirection == "Right")
+                    {
+                        this.transform.Translate(new Vector3(-charSpeed * Time.deltaTime, 0f, 0f));
+                    }
+                    else if (cam.camDirection == "Left")
+                    {
+                        this.transform.Translate(new Vector3(charSpeed * Time.deltaTime, 0f, 0f));
+                    }
+                    else if (cam.camDirection == "Back")
+                    {
+                        this.transform.Translate(new Vector3(0f, 0f, charSpeed * Time.deltaTime));
+                    }
                 }
-                else if (cam.camDirection == "Left")
+                if (Input.GetKey(KeyCode.LeftArrow))
                 {
-                    this.transform.Translate(new Vector3(-charSpeed * Time.deltaTime, 0f, 0f));
+                    //  Move("Left");
+                    // this.transform.Translate(new Vector3(-charSpeed * Time.deltaTime, 0f, 0f));
+                    if (cam.camDirection == "Forward")
+                    {
+                        this.transform.Translate(new Vector3(-charSpeed * Time.deltaTime, 0f, 0f));
+                    }
+                    else if (cam.camDirection == "Back")
+                    {
+                        this.transform.Translate(new Vector3(charSpeed * Time.deltaTime, 0f, 0f));
+                    }
+                    else if (cam.camDirection == "Right")
+                    {
+                        this.transform.Translate(new Vector3(0f, 0f, charSpeed * Time.deltaTime));
+                    }
+                    else if (cam.camDirection == "Left")
+                    {
+                        this.transform.Translate(new Vector3(0f, 0f, -charSpeed * Time.deltaTime));
+                    }
                 }
-                else if (cam.camDirection == "Back")
+                if (Input.GetKey(KeyCode.RightArrow))
                 {
-                    this.transform.Translate(new Vector3(0f, 0f, -charSpeed * Time.deltaTime));
+                    // Move("Right");
+                    //this.transform.Translate(new Vector3(charSpeed * Time.deltaTime, 0f, 0f));
+                    if (cam.camDirection == "Forward")
+                    {
+                        this.transform.Translate(new Vector3(charSpeed * Time.deltaTime, 0f, 0f));
+                    }
+                    if (cam.camDirection == "Back")
+                    {
+                        this.transform.Translate(new Vector3(-charSpeed * Time.deltaTime, 0f, 0f));
+                    }
+                    else if (cam.camDirection == "Right")
+                    {
+                        this.transform.Translate(new Vector3(0f, 0f, -charSpeed * Time.deltaTime));
+                    }
+                    else if (cam.camDirection == "Left")
+                    {
+                        this.transform.Translate(new Vector3(0f, 0f, charSpeed * Time.deltaTime));
+                    }
                 }
 
             }
-            if (Input.GetKey(KeyCode.DownArrow))
-            {
-                //Move("Down");
-                //this.transform.Translate(new Vector3(0f, 0f, -charSpeed * Time.deltaTime));
-                if (cam.camDirection == "Forward")
-                {
-                    this.transform.Translate(new Vector3(0f, 0f, -charSpeed * Time.deltaTime));
-                }
-                else if (cam.camDirection == "Right")
-                {
-                    this.transform.Translate(new Vector3(-charSpeed * Time.deltaTime, 0f, 0f));
-                }
-                else if (cam.camDirection == "Left")
-                {
-                    this.transform.Translate(new Vector3(charSpeed * Time.deltaTime, 0f, 0f));
-                }
-                else if (cam.camDirection == "Back")
-                {
-                    this.transform.Translate(new Vector3(0f, 0f, charSpeed * Time.deltaTime));
-                }
-            }
-            if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                //  Move("Left");
-                // this.transform.Translate(new Vector3(-charSpeed * Time.deltaTime, 0f, 0f));
-                if (cam.camDirection == "Forward")
-                {
-                    this.transform.Translate(new Vector3(-charSpeed * Time.deltaTime, 0f, 0f));
-                }
-                else if (cam.camDirection == "Back")
-                {
-                    this.transform.Translate(new Vector3(charSpeed * Time.deltaTime, 0f, 0f));
-                }
-                else if (cam.camDirection == "Right")
-                {
-                    this.transform.Translate(new Vector3(0f, 0f, charSpeed * Time.deltaTime));
-                }
-                else if (cam.camDirection == "Left")
-                {
-                    this.transform.Translate(new Vector3(0f, 0f, -charSpeed * Time.deltaTime));
-                }
-            }
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                // Move("Right");
-                //this.transform.Translate(new Vector3(charSpeed * Time.deltaTime, 0f, 0f));
-                if (cam.camDirection == "Forward")
-                {
-                    this.transform.Translate(new Vector3(charSpeed * Time.deltaTime, 0f, 0f));
-                }
-                if (cam.camDirection == "Back")
-                {
-                    this.transform.Translate(new Vector3(-charSpeed * Time.deltaTime, 0f, 0f));
-                }
-                else if (cam.camDirection == "Right")
-                {
-                    this.transform.Translate(new Vector3(0f, 0f, -charSpeed * Time.deltaTime));
-                }
-                else if (cam.camDirection == "Left")
-                {
-                    this.transform.Translate(new Vector3(0f, 0f, charSpeed * Time.deltaTime));
-                }
-            }
-
         }
     }
    
