@@ -21,8 +21,9 @@ public class Collectible : MonoBehaviour
     {
 
 
-        Coll.gameObject.GetComponent<PlayerInfo>().Collectibles[CollectibleNum] = true;
-        Destroy(this.gameObject);
-
+        Coll.gameObject.GetComponent<PlayerInfo>().UpdateUI(CollectibleNum);
+        if (Coll.gameObject.GetComponent<PlayerInfo>().Collectibles[CollectibleNum]) {
+            Destroy(this.gameObject);
+        }
     }
 }
