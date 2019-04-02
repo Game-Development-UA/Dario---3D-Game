@@ -7,6 +7,8 @@ public class PlayerInfo : MonoBehaviour
     // Start is called before the first frame update
     public bool[] health;
     public bool[] Collectibles = new bool[4];
+    public Sprite notCollected;
+    public Sprite Collected;
     void Start()
     {
         Collectibles[0] = false;
@@ -19,6 +21,10 @@ public class PlayerInfo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+    public void UpdateUI() {
+
+
     }
 }

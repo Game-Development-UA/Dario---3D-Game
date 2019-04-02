@@ -16,7 +16,7 @@ public class MovePlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MovePlayer();
+        TranslatePlayer();
     }
 
     public void OnTriggerEnter(Collider col) {
@@ -24,8 +24,8 @@ public class MovePlayer : MonoBehaviour
         col.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
         Player = col.gameObject;
     }
-    public void MovePlayer() {
-        Player.transform.translate(new Vector3(Direction.x * Time.deltaTime * platSpeed, Direction.y * Time.deltaTime * platSpeed, Direction.z * Time.deltaTime * platSpeed));
+    public void TranslatePlayer() {
+        Player.transform.Translate(new Vector3(Direction.x * Time.deltaTime * platSpeed, Direction.y * Time.deltaTime * platSpeed, Direction.z * Time.deltaTime * platSpeed));
     }
 
     public void OnTriggerExit(Collider col) {
