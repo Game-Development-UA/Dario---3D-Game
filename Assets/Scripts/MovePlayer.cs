@@ -9,6 +9,7 @@ public class MovePlayer : MonoBehaviour
     public GameObject Player;
     public float platSpeed;
     public bool playerOn;
+    
     void Start()
     {
         playerOn = false;
@@ -40,4 +41,5 @@ public class MovePlayer : MonoBehaviour
         playerOn = false;
         col.gameObject.GetComponent<Controller_Button>().stuckToPlat = false;
     }
+  
 }

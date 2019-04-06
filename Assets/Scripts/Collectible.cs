@@ -6,16 +6,7 @@ public class Collectible : MonoBehaviour
 {
     // Start is called before the first frame update
     public int CollectibleNum;
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void OnTriggerEnter(Collider Coll)
     {
@@ -26,4 +17,6 @@ public class Collectible : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+
 }
