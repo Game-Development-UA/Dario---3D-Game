@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 14a2216a5a0600e4fb80d4d0c8d13235
+guid: e4e20e2d9167cbb46a0439162dea5a49
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -11,7 +11,6 @@ ModelImporter:
     2300000: default
     3300000: default
     4300000: default
-    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1
