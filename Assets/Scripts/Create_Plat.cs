@@ -35,7 +35,7 @@ public class Create_Plat : MonoBehaviour
         {
             if (this.gameObject.name == "JumpPath")
             {
-                if (player.GetComponent<Jump>().jumpPowerUp)
+                if (player.GetComponent<PlayerInfo>().jumpPowerUp)
                 {
                     pathJumpStarted = true;
                     compTriangle = false;
