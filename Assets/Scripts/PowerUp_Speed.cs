@@ -15,4 +15,14 @@ public class PowerUp_Speed : MonoBehaviour
     {
         
     }
+    public void OnCollisionEnter(Collision Coll)
+    {
+
+
+        Coll.gameObject.GetComponent<Controller_Button>().charSpeed = 1.5f * Coll.gameObject.GetComponent<Controller_Button>().charSpeed;
+        Coll.gameObject.GetComponent<Controller_Button>().speedPowerUp = true;
+
+        Destroy(this.gameObject);
+
+    }
 }

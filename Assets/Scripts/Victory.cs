@@ -15,8 +15,4 @@ public class Victory : MonoBehaviour
     {
         
     }
-
-    public void OnTriggerEnter(Collider col) {
-
-    }
 }
