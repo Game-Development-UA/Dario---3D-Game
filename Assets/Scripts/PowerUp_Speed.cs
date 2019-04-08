@@ -20,8 +20,8 @@ public class PowerUp_Speed : MonoBehaviour
 
 
         Coll.gameObject.GetComponent<Controller_Button>().charSpeed = 1.5f * Coll.gameObject.GetComponent<Controller_Button>().charSpeed;
-        Coll.gameObject.GetComponent<Controller_Button>().speedPowerUp = true;
-
+        Coll.gameObject.GetComponent<PlayerInfo>().speedPowerUp = true;
+        Coll.gameObject.GetComponent<PlayerInfo>().UpdateUI(4);
         Destroy(this.gameObject);
 
     }

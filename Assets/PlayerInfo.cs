@@ -9,17 +9,19 @@ public class PlayerInfo : MonoBehaviour
     // Start is called before the first frame update
     public bool[] health;
     public bool jumpPowerUp;
+    public bool speedPowerUp;
     public bool[] Collectibles = new bool[3];
-    public Image[] UIImages = new Image[4];
+    public Image[] UIImages = new Image[5];
     public Sprite Collected;
     public Sprite Jump;
+    public Sprite Speed;
     void Start()
     {
         Collectibles[0] = false;
         Collectibles[1] = false;
         Collectibles[2] = false;
         jumpPowerUp = false;
-     
+        speedPowerUp = false;
 
     }
 
@@ -35,6 +37,7 @@ public class PlayerInfo : MonoBehaviour
         }
         else if (num == 4)
         {
+            UIImages[num].overrideSprite = Speed;
         }
         else
         {

@@ -7,13 +7,13 @@ public class Controller_Button : MonoBehaviour
   
     public float charSpeed;
     public bool stuckToPlat;
-    public bool speedPowerUp;
+    
     
     public Camera_Follow cam;
     // Start is called before the first frame update
     void Start()
     {
-        speedPowerUp = false;
+        
     }
 
     // Update is called once per frame
