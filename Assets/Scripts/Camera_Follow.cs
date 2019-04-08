@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Events;
+using TMPro;
 
 public class Camera_Follow : MonoBehaviour
 {
@@ -14,6 +17,7 @@ public class Camera_Follow : MonoBehaviour
     public float limitTangent;
     public float cameraSpeed;
     public bool viewMode;
+    public GameObject ViewText;
     // Start is called before the first frame update
     void Start()
     {
@@ -192,10 +196,12 @@ public class Camera_Follow : MonoBehaviour
 public void UpdateViewMode() {
     if (viewMode == false) {
         viewMode = true;
+        ViewText.GetComponent<TextMeshProUGUI>().enabled = true;
     }
     else {
         viewMode = false;
-    }
+        ViewText.GetComponent<TextMeshProUGUI>().enabled = false;
+        }
 }
 
 }
