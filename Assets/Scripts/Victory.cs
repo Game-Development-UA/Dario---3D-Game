@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Victory : MonoBehaviour
 {
@@ -14,5 +15,10 @@ public class Victory : MonoBehaviour
     void Update()
     {
         
+    }
+    public void OnTriggerEnter(Collider Col) {
+        
+        
+        SceneManager.LoadScene(3);
     }
 }
